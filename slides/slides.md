@@ -16,7 +16,7 @@
 
 * Javascript barbarian
 * Co-founder of [cujoJS](http://cujojs.com/), the <br/>Javascript Architectural Toolkit
-	* wire, when, curl, cram, meld, msgs, rest, cola, poly, seed ...
+  * wire, when, curl, cram, meld, msgs, rest, cola, poly, seed ...
 * Engineer at [SpringSource](http://http://springsource.org/) / [Pivotal](http://gopivotal.com/)
 
 
@@ -69,14 +69,14 @@ o |o \o o o| \o o |o o/ \o
 ## Existing module formats
 
 * _AMD_: Asynchronous Module Definition
-	* RequireJS, cujoJS/curl.js, Inject.js, dojo, MooTools
+  * RequireJS, cujoJS/curl.js, Inject.js, dojo, MooTools
 * _CJS_: CommonJS Modules/1.1
-	* node.js, RingoJS, Ember, etc.
+  * node.js, RingoJS, Ember, etc.
 * _node_: _CJS_ with extensions
-	* `module.exports = ...`
-	* `this === exports`
+  * `module.exports = ...`
+  * `this === exports`
 * _UMD_: Universal Module Definition
-	* _AMD_ + _CJS/node_ in one file
+  * _AMD_ + _CJS/node_ in one file
 * _Others_: YUI, Ext, etc.
 
 
@@ -87,18 +87,18 @@ o |o \o o o| \o o |o o/ \o
 
 ```js
 module "fu" {
-	export function fuify (word) {
-		return word + 'fu';
-	};
-	var somethingElse = 5;
-	export somethingElse;
+  export function fuify (word) {
+    return word + 'fu';
+  };
+  var somethingElse = 5;
+  export somethingElse;
 }
 
 module "kung/fu" {
-	import { fuify } from "fu";
-	var kungfu;
-	kungfu = fuify('kung');
-	export kungfu;
+  import { fuify } from "fu";
+  var kungfu;
+  kungfu = fuify('kung');
+  export kungfu;
 }
 ```
 
@@ -107,7 +107,7 @@ module "kung/fu" {
 ## ES6 Module basics
 
 * Module ids are just string literals
-	* realistically, they should be compatible with file names and urls
+  * realistically, they should be compatible with file names and urls
 * Zero or more imports: <br/>`import { <names> } from "<id>";`
 * Zero or more exports: <br/>`export <expression>;`
 
@@ -117,15 +117,15 @@ module "kung/fu" {
 
 ```js
 module "fubar" {
-	// #FAIL! SyntaxError
-	if (document.all) {
-		import { ick } from "uglyHacks/ie8";
-		export function foo (n) { ick(n); }
-	}
-	else {
-		import { rainbows } from "shortcuts/w3c";
-		export function foo (n) { rainbows(n); }
-	}
+  // #FAIL! SyntaxError
+  if (document.all) {
+    import { ick } from "uglyHacks/ie8";
+    export function foo (n) { ick(n); }
+  }
+  else {
+    import { rainbows } from "shortcuts/w3c";
+    export function foo (n) { rainbows(n); }
+  }
 }
 ```
 
@@ -135,16 +135,16 @@ module "fubar" {
 
 ```js
 module "fu" {
-	export function fuify (word) {
-		return word + 'fu';
-	};
+  export function fuify (word) {
+    return word + 'fu';
+  };
 }
 
 module "kung/fu" {
-	import { fuify as tofu } from "fu";
-	var kungfu;
-	kungfu = tofu('kung');
-	export kungfu;
+  import { fuify as tofu } from "fu";
+  var kungfu;
+  kungfu = tofu('kung');
+  export kungfu;
 }
 ```
 
@@ -157,7 +157,7 @@ module "kung/fu" {
 ```js
 // file "fu.js"
 export function fuify (word) {
-	return word + 'fu';
+  return word + 'fu';
 };
 ```
 
@@ -189,18 +189,18 @@ Here's how we already do it in AMD:
 ```js
 // file "fu.js" in AMD format
 define(function () {
-	// "fu" is a function-module
-	return function (word) {
-		return word + 'fu';
-	};
+  // "fu" is a function-module
+  return function (word) {
+    return word + 'fu';
+  };
 });
 ```
 
 ```js
 // file "kung/fu.js" in AMD format
 define(["fu.js"], function (fuify) {
-	// use "fu", the function-module
-	return fuify('kung');
+  // use "fu", the function-module
+  return fuify('kung');
 });
 ```
 
@@ -214,7 +214,7 @@ And in node:
 // file "fu.js" in node format
 // "fu" is a function-module
 module.exports = function (word) {
-	return word + 'fu';
+  return word + 'fu';
 };
 ```
 
@@ -253,16 +253,16 @@ Thankfully, TC39 has committed to making this work in ES6, too!
 // file "fu.js"
 // reserved `default` keyword finally has a use!
 export default function (word) {
-	return word + 'fu';
+  return word + 'fu';
 };
 ```
 
 ```js
 // file "kung/fu.js"
 // slightly different import syntax
-import fuify from "foo";
+import fuify from "fu";
 var kungfu;
-kungfu = tofu('kung');
+kungfu = fuify('kung');
 export kungfu;
 ```
 
@@ -274,11 +274,11 @@ export kungfu;
 ### "script" versus "module"
 
 * Script elements expect global code (aka "scripts")
-	* Any modules must be wrapped: <br/> `module "id" { /*...*/ }`!
-	* `export` in a script will likely throw a SyntaxError
+  * Any modules must be wrapped: <br/> `module "id" { /*...*/ }`!
+  * `export` in a script will likely throw a SyntaxError
 * Module loaders expect a single module (except when bundled)
-	* The spec says that single modules should omit the wrapper!
-	* Not ratified: how to specify bundles of modules.
+  * The spec says that single modules should omit the wrapper!
+  * Not ratified: how to specify bundles of modules.
 
 
 ----------------------------------------
@@ -320,9 +320,9 @@ AMD uses a similar form.
 
 * Dynamically load chunks of an app
 * Load non-ES6 modules and text-based resources
-	* "Legacy" AMD, CJS modules
-	* HTML templates, CSS
-	* CoffeeScript, LESS, other "transpiled" code
+  * "Legacy" AMD, CJS modules
+  * HTML templates, CSS
+  * CoffeeScript, LESS, other "transpiled" code
 
 ----------------------------------------
 
@@ -353,14 +353,14 @@ A simple use case:
 ```js
 // load and run an app's "main" module
 System.load("app/main",
-	function (main) {
-		main();
-		// get something that you know was loaded by "app/main":
-		System.get('app/socket').init();
-	},
-	function (ex) {
-		alert('drat! foiled again: ', ex.message);
-	}
+  function (main) {
+    main();
+    // get something that you know was loaded by "app/main":
+    System.get('app/socket').init();
+  },
+  function (ex) {
+    alert('drat! foiled again: ', ex.message);
+  }
 );
 ```
 
@@ -371,25 +371,25 @@ System.load("app/main",
 
 ```js
 var loader = new Loader(System, {
-	global: window,
-	baseURL: '../client/',
-	linkedTo: null, // set the fundamental intrinsics of the modules
-	strict: true,
-	resolve: myResolver
-	fetch: myFetcher
-	translate: myTranslater
+  global: window,
+  baseURL: '../client/',
+  linkedTo: null, // set the fundamental intrinsics of the modules
+  strict: true,
+  resolve: myResolver
+  fetch: myFetcher
+  translate: myTranslater
 // etc.
 });
 
 loader.load("app/main",
-	function (main) {
-		main();
-		// get something that you know was loaded by "app/main":
-		System.get('app/socket').init();
-	},
-	function (ex) {
-		alert('drat! foiled again: ', ex.message);
-	}
+  function (main) {
+    main();
+    // get something that you know was loaded by "app/main":
+    System.get('app/socket').init();
+  },
+  function (ex) {
+    alert('drat! foiled again: ', ex.message);
+  }
 );
 ```
 
@@ -427,13 +427,13 @@ var loader = new Loader();
 var origResolve = loader.resolve;
 
 loader.resolve = function (moduleId, options) {
-	if ('node' == options.type) {
-		// find in top-level node_modules folder
-		return { name: "node_modules/" + moduleId };
-	}
-	else {
-		return origResolve.apply(this, arguments);
-	}
+  if ('node' == options.type) {
+    // find in top-level node_modules folder
+    return { name: "node_modules/" + moduleId };
+  }
+  else {
+    return origResolve.apply(this, arguments);
+  }
 };
 ```
 
@@ -456,8 +456,8 @@ Bootstrapping is similar to AMD:
 Bundling is also similar to AMD:
 
 * Process each module
-	* Perform id normalization step (optional)
-	* Wrap: <br/>`module "<path/id>" { <body> };`
+  * Perform id normalization step (optional)
+  * Wrap: <br/>`module "<path/id>" { <body> };`
 * Concatenate into a file (order is not important!)
 * Prepend the loader configuration / customization code
 
@@ -556,7 +556,7 @@ performance issues, unfortunately.  Loader specs are still being developed.
 ### Cons:
 
 * JSLint and JSHint don't grok AMD or CJS modules
-	* Can't ensure modules will transpile
+  * Can't ensure modules will transpile
 
 
 ----------------------------------------
@@ -567,13 +567,13 @@ performance issues, unfortunately.  Loader specs are still being developed.
 
 * Author source files as ES6 modules
 * Convert ES6 modules to ES5/ES3
-	* TypeScript - by Microsoft: http://typescript.codeplex.com
-		* Note: Lags **way** behind standard! (v0.9)
-	* ES6 Module Transpiler - by Square: https://github.com/square/es6-module-transpiler
-		* Fussy, restrictive, and buggy (v0.1.3)
-		* Use the update-to-latest-proposal branch!
-		* Note: no transpilation of other ES6 language features!
-			* Use an ES5 polyfill like cujoJS's poly.js
+  * TypeScript - by Microsoft: http://typescript.codeplex.com
+    * Note: Lags **way** behind standard! (v0.9)
+  * ES6 Module Transpiler - by Square: https://github.com/square/es6-module-transpiler
+    * Fussy, restrictive, and buggy (v0.1.3)
+    * Use the update-to-latest-proposal branch!
+    * Note: no transpilation of other ES6 language features!
+      * Use an ES5 polyfill like cujoJS's poly.js
 
 
 ----------------------------------------
@@ -612,8 +612,8 @@ performance issues, unfortunately.  Loader specs are still being developed.
 ### Cons:
 
 * ES6 language specs are not ratified, may change
-	* Module format may change, too
-	* Current converters/transpilers lag behind standard or suck!
+  * Module format may change, too
+  * Current converters/transpilers lag behind standard or suck!
 * JSLint and JSHint not useful (yet)
 * Additional build step required
 * Debugging in older browsers sucks (no source maps)
@@ -650,8 +650,8 @@ There only seems to be one real option...
 
 ```js
 if (process && process.env) {
-	// conditional import and export!
-	exports.getFile = require('fs').readSync;
+  // conditional import and export!
+  exports.getFile = require('fs').readSync;
 }
 ```
 
@@ -668,9 +668,9 @@ if (process && process.env) {
 
 ```js
 if (process && process.env) {
-	// SyntaxError in ES6
-	import { readSync } from 'fs';
-	export getFile = readSync;
+  // SyntaxError in ES6
+  import { readSync } from 'fs';
+  export getFile = readSync;
 }
 ```
 
@@ -688,9 +688,9 @@ if (process && process.env) {
 ```js
 var readSync = require('fs').readSync;
 exports.getFile = function () {
-	if (process && process.env) {
-		return readSync.apply(this, arguments);
-	}
+  if (process && process.env) {
+    return readSync.apply(this, arguments);
+  }
 };
 ```
 
@@ -708,9 +708,9 @@ exports.getFile = function () {
 ```js
 import { readSync } from 'fs';
 export function getFile () {
-	if (process && process.env) {
-		return readSync.apply(this, arguments);
-	}
+  if (process && process.env) {
+    return readSync.apply(this, arguments);
+  }
 };
 ```
 
@@ -779,8 +779,8 @@ var bar = require('bar');
 
 ```js
 define(function (require, module, exports) {
-	var foo = require('foo');
-	exports.bar = function (a) { return foo.bar(a + 1); };
+  var foo = require('foo');
+  exports.bar = function (a) { return foo.bar(a + 1); };
 });
 ```
 
@@ -813,9 +813,9 @@ export function bar (a) { return foo.bar(a + 1); };
 ```js
 var deps = ['foo', 'bar'];
 function factory (foo, bar) {
-	return function (a) {
-		return foo(bar(a));
-	}
+  return function (a) {
+    return foo(bar(a));
+  }
 }
 define(deps, factory);
 ```
@@ -836,9 +836,9 @@ define(deps, factory);
 
 ```js
 define(['foo', 'bar'], function (foo, bar) {
-	return function (a) {
-		return foo(bar(a));
-	}
+  return function (a) {
+    return foo(bar(a));
+  }
 });
 ```
 
@@ -858,7 +858,7 @@ define(['foo', 'bar'], function (foo, bar) {
 import foo from 'foo';
 import bar from 'bar';
 export default function (a) {
-	return foo(bar(a));
+  return foo(bar(a));
 }
 ```
 
